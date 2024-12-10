@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacienti Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            height: 40px; /* Adjust as needed */
+            margin-right: 20px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar button:hover {
+            background-color: #777;
+        }
+
+        .navbar .login-btn {
+            margin-left: auto;
+            background-color: #007BFF;
+            font-weight: bold;
+        }
+
+        .navbar .login-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="logo">
+        <img src="/images/logo.jpg" alt="Logo">
+    </div>
+    <div class="nav-links">
+        <button onclick="window.location.href='/pacienti'">Pacienți</button>
+        <button onclick="window.location.href='/apartinatori'">Aparținători</button>
+        <button onclick="window.location.href='/medici'">Medici</button>
+        <button onclick="window.location.href='/spitale'">Spitale</button>
+        <button onclick="window.location.href='/medicamente'">Medicamente</button>
+        <button onclick="window.location.href='/companii_farmaceutice'">Companii Farmaceutice</button>
+        <button onclick="window.location.href='/boli_asociate'">Boli Asociate</button>
+    </div>
+    <button class="login-btn" onclick="window.location.href='/login'">Log In Admin</button>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Bază de date pacienți</h1>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Pacient</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">Editează Pacient</h1>
+    <form th:action="@{/pacienti/update}" th:object="${pacient}" method="post" class="needs-validation" novalidate>
+        <div class = "mb-3">
+            <label for="id_pacient" class="form-label">ID:</label>
+            <input type="text" class="form-control" id="id_pacient" th:field="*{id_pacient}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="nume" class="form-label">Nume:</label>
+            <input type="text" class="form-control" id="nume" th:field="*{nume}" required>
+            <div class="invalid-feedback">
+                Introduceți un nume valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="prenume" class="form-label">Prenume:</label>
+            <input type="text" class="form-control" id="prenume" th:field="*{prenume}" required>
+            <div class="invalid-feedback">
+                Introduceți un prenume valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="cnp" class="form-label">CNP:</label>
+            <input type="text" class="form-control" id="cnp" th:field="*{cnp}" required>
+            <div class="invalid-feedback">
+                Introduceți un CNP valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="sex" class="form-label">Sex:</label>
+            <select class="form-control" id="sex" th:field="*{sex}" required>
+                <option value="">Selectează sexul</option>
+                <option value="M">Masculin (M)</option>
+                <option value="F">Feminin (F)</option>
+            </select>
+            <div class="invalid-feedback">
+                Introduceți M/F.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="datanasterii" class="form-label">Data Nașterii:</label>
+            <input type="date" class="form-control" id="datanasterii" th:field="*{dataNasterii}" required>
+            <div class="invalid-feedback">
+                Introduceți o dată valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="datainrolareprogram" class="form-label">Data Înrolării în Program:</label>
+            <input type="date" class="form-control" id="datainrolareprogram" th:field="*{dataInrolareProgram}" required>
+            <div class="invalid-feedback">
+                Introduceți o dată valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="strada" class="form-label">Strada:</label>
+            <input type="text" class="form-control" id="strada" th:field="*{strada}" required>
+            <div class="invalid-feedback">
+                Introduceți un nume de stradă valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="numartelefon" class="form-label">Număr de Telefon:</label>
+            <input type="text" class="form-control" id="numartelefon" th:field="*{numarTelefon}" required>
+            <div class="invalid-feedback">
+                Introduceți un număr de telefon valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="oras" class="form-label">Orașul:</label>
+            <input type="text" class="form-control" id="oras" th:field="*{oras}" required>
+            <div class="invalid-feedback">
+                Introduceți un oraș valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="judet" class="form-label">Județul:</label>
+            <input type="text" class="form-control" id="judet" th:field="*{judet}" required>
+            <div class="invalid-feedback">
+                Introduceți un județ valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="id_medic" class="form-label">ID-ul medicului aferent:</label>
+            <input type="number" class="form-control" id="id_medic" th:field="*{id_medic}" required min="1" step="1">
+            <div class="invalid-feedback">
+                Introduceți un ID valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="id_apartinator" class="form-label">ID-ul apartinatorului:</label>
+            <input type="number" class="form-control" id="id_apartinator" th:field="*{id_apartinator}" required min="1" step="1">
+            <div class="invalid-feedback">
+                Introduceți un ID valid.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/pacienti'">Anulează</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Pacienților</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .btn{
+        margin: 2px;
+    }
+    .nowrap {
+        white-space: nowrap;
+    }
+</style>
+<body>
+<div class="container my-4">
+    <h1 class="text-center mb-4">Lista Pacienților</h1>
+
+    <div class="d-flex justify-content-between mb-3">
+        <form class="d-flex" action="/pacienti/search" method="get">
+            <input type="text" class="form-control me-2" name="nume" placeholder="Caută după nume pacient..." />
+            <button type="submit" class="btn btn-primary">Caută</button>
+        </form>
+        <a href="/" class="btn btn-success">Revino pe pagina principală</a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>Nume</th>
+            <th>Prenume</th>
+            <th>CNP</th>
+            <th>Sex</th>
+            <th>Data Nașterii</th>
+            <th>Data Înrolării</th>
+            <th>Strada</th>
+            <th>Telefon</th>
+            <th>Oraș</th>
+            <th>Județ</th>
+            <th>Medic</th>
+            <th>Aparținător</th>
+            <th>Opțiuni</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${pacienti}">
+            <td th:text="${patient.nume}">Nume</td>
+            <td th:text="${patient.prenume}">Prenume</td>
+            <td th:text="${patient.cnp}">CNP</td>
+            <td th:text="${patient.sex}">Sex</td>
+            <td class="nowrap" th:text="${patient.dataNasterii}">Data Nașterii</td>
+            <td class="nowrap" th:text="${patient.dataInrolareProgram}">Data Înrolării</td>
+            <td th:text="${patient.strada}">Strada</td>
+            <td th:text="${patient.numarTelefon}">Telefon</td>
+            <td th:text="${patient.oras}">Oraș</td>
+            <td th:text="${patient.judet}">Județ</td>
+            <td th:text="${patient.numeMedic}">Medic</td>
+            <td th:text="${patient.numeApartinator}">Aparținător</td>
+            <td>
+                <a th:href="@{/pacienti/detalii/{id}(id=${patient.id_pacient})}" class="btn btn-info btn-sm">Detalii Teste</a>
+                <a th:href="@{/pacienti/istoric/{id}(id=${patient.id_pacient})}" class="btn btn-info btn-sm">Istoric Medical</a>
+                <a th:href="@{/pacienti/edit/{id}(id=${patient.id_pacient})}" class="btn btn-warning btn-sm">Editează</a>
+                <a th:href="@{/pacienti/delete/{id}(id=${patient.id_pacient})}" class="btn btn-danger btn-sm" onclick="return confirm('Ești sigur că vrei să ștergi acest pacient?')">Șterge</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/pacienti/new}" class="btn btn-success">Adaugă un nou pacient</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

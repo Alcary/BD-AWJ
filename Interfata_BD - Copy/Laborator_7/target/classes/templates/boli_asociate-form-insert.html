@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaugă Boală Asociată</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">Adaugă Boală Asociată</h1>
+    <form th:action="@{/boli_asociate/save}" th:object="${boli}" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="nume" class="form-label">Nume:</label>
+            <input type="text" class="form-control" id="nume" th:field="*{nume}" required>
+            <div class="invalid-feedback">
+                Introduceți un nume valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="tratament" class="form-label">Tratament:</label>
+            <input type="text" class="form-control" id="tratament" th:field="*{tratament}" required>
+            <div class="invalid-feedback">
+                Introduceți un tratament valid.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/boli_asociate'">Anulează</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+</title>
+</head>
+<body>
+
+</body>
+</html>
