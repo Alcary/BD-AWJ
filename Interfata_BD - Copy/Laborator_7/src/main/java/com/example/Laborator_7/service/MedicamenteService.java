@@ -22,8 +22,19 @@ public class MedicamenteService {
         return medicamenteDAO.findByNume(nume);
     }
 
-    public int saveMedicamente(Medicamente medicamente) {
-        return medicamenteDAO.saveMedicamente(medicamente);
+    public int insertMedicament(Medicamente medicament) {
+        return medicamenteDAO.insertMedicament(medicament);
     }
 
+    public int updateMedicament(Medicamente medicament) {
+        return medicamenteDAO.updateMedicament(medicament);
+    }
+
+    public Medicamente findById(int id) {
+        return medicamenteDAO.findById(id);
+    }
+
+    public void deleteMedicament(int id) {
+        medicamenteDAO.deleteMedicament(id);
+    }
 }

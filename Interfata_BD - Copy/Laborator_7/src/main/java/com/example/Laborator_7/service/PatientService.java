@@ -21,10 +21,6 @@ public class PatientService {
         return patientDAO.findByNume(nume);
     }
 
-    public int savePatient(Patient patient) {
-        return patientDAO.savePatient(patient);
-    }
-
     public void deletePacient(int id) {
         patientDAO.deletePacient(id);
     }

@@ -24,20 +24,43 @@ public class MedicamenteDAO {
         return jdbcTemplate.query(sql, new MedicamentRowMapper());
     }
 
-    public int saveMedicamente(Medicamente medicament) {
-        String sql = "INSERT INTO medicamente (id_medicament, nume, duratatratament, id_companie) VALUES (?, ?, ?, ?)";
+    public List<Medicamente> findByNume(String nume) {
+        String sql = "SELECT M.*, C.Nume AS NumeCompanie FROM medicamente " +
+                "M INNER JOIN companii_farmaceutice C ON M.id_companie = C.id_companie " +
+                "WHERE M.nume LIKE CONCAT('%', ?, '%') " +
+                "ORDER BY M.id_medicament";
+        return jdbcTemplate.query(sql, new MedicamentRowMapper(), nume);
+    }
 
+    public Medicamente findById(int id) {
+        String sql = "SELECT M.*, C.Nume AS NumeCompanie FROM medicamente " +
+                "M INNER JOIN companii_farmaceutice C ON M.id_companie = C.id_companie " +
+                "WHERE M.id_medicament = ?";
+        return jdbcTemplate.queryForObject(sql, new MedicamentRowMapper(), id);
+    }
+
+    public int insertMedicament(Medicamente medicament) {
+        String sql = "INSERT INTO medicamente (nume, duratatratament, id_companie) " +
+                "VALUES (?, ?, ?)";
         return jdbcTemplate.update(sql,
-                medicament.getIdMedicament(),
                 medicament.getNumeMedicament(),
                 medicament.getDurataTratament(),
                 medicament.getIdCompanie());
     }
 
-    public List<Medicamente> findByNume(String nume) {
-        String sql = "SELECT * FROM medicamente WHERE nume LIKE CONCAT('%', ?, '%') " +
-                "ORDER BY id_medicament";
-        return jdbcTemplate.query(sql, new MedicamentRowMapper(), nume);
+    public int updateMedicament(Medicamente medicament) {
+        String sql = "UPDATE medicamente SET nume = ?, duratatratament = ?, id_companie = ? " +
+                "WHERE id_medicament = ?";
+        return jdbcTemplate.update(sql,
+                medicament.getNumeMedicament(),
+                medicament.getDurataTratament(),
+                medicament.getIdCompanie(),
+                medicament.getIdMedicament());
+    }
+
+    public void deleteMedicament(int id) {
+        String sql = "DELETE FROM medicamente WHERE id_medicament = ?";
+        jdbcTemplate.update(sql, id);
     }
 
     private static class MedicamentRowMapper implements RowMapper<Medicamente> {
