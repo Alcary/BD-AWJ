@@ -66,7 +66,7 @@ public class Boli_AsociateController {
             return "redirect:/boli_asociate";
         }
         List<Boli_Asociate> boliAsociate = boli_AsociateService.findByNume(nume);
-        model.addAttribute("boli_asociate", boliAsociate);
+        model.addAttribute("boliAsociate", boliAsociate);
         return "boli_asociate";
     }
 }

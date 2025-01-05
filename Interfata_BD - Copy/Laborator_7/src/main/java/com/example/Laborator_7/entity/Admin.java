@@ -8,6 +8,8 @@ public class Admin {
 
     private String parola;
 
+    private String rol;
+
     public int getIdAdmin() {
         return idAdmin;
     }
@@ -30,5 +32,13 @@ public class Admin {
 
     public void setParola(String parola) {
         this.parola = parola;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

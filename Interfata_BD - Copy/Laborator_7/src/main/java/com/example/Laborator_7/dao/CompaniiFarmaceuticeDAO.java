@@ -23,7 +23,7 @@ public class CompaniiFarmaceuticeDAO {
         return jdbcTemplate.query(sql, new CompanieRowMapper());
     }
 
-    public int saveCompanie(CompaniiFarmaceutice companie) {
+    public int insertCompanie(CompaniiFarmaceutice companie) {
         String sql = "INSERT INTO companii_farmaceutice (Nume, Strada, Oras, Tara) VALUES (?, ?, ?, ?)";
 
         return jdbcTemplate.update(sql,
@@ -35,6 +35,26 @@ public class CompaniiFarmaceuticeDAO {
     public List<CompaniiFarmaceutice> findByNume(String nume) {
         String sql = "SELECT * FROM companii_farmaceutice WHERE nume LIKE CONCAT('%', ?, '%')";
         return jdbcTemplate.query(sql, new CompanieRowMapper(), nume);
+    }
+
+    public CompaniiFarmaceutice findById(int id) {
+        String sql = "SELECT * FROM companii_farmaceutice WHERE id_companie = ?";
+        return jdbcTemplate.queryForObject(sql, new CompanieRowMapper(), id);
+    }
+
+    public void updateCompanie(CompaniiFarmaceutice companie) {
+        String sql = "UPDATE companii_farmaceutice SET Nume = ?, Strada = ?, Oras = ?, Tara = ? WHERE id_companie = ?";
+        jdbcTemplate.update(sql,
+                companie.getNume(),
+                companie.getStrada(),
+                companie.getOras(),
+                companie.getTara(),
+                companie.getIdCompanieFarmaceutica());
+    }
+
+    public void deleteCompanie(int id) {
+        String sql = "DELETE FROM companii_farmaceutice WHERE id_companie = ?";
+        jdbcTemplate.update(sql, id);
     }
 
     private static class CompanieRowMapper implements RowMapper<CompaniiFarmaceutice> {

@@ -23,7 +23,7 @@ public class SpitalDAO {
     }
 
     public List<Spital> findByNume(String nume) {
-        String sql = "SELECT * FROM spital WHERE nume LIKE CONCAT('%', ?, '%') " +
+        String sql = "SELECT * FROM spitale WHERE nume LIKE CONCAT('%', ?, '%') " +
                 "ORDER BY id_spital";
         return jdbcTemplate.query(sql, new SpitalRowMapper(), nume);
     }

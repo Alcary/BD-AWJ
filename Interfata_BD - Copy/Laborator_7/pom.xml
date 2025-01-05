@@ -6,10 +6,10 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Laborator_7</artifactId>
+	<artifactId>Baza_de_date_pacienti</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Calaras_Alexandru</name>
 	<description>Demo project for Spring Boot</description>
@@ -79,6 +79,13 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 	</dependencies>
 

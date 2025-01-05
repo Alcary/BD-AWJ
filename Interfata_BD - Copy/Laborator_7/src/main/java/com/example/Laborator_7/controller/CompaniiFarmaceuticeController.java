@@ -34,8 +34,35 @@ public class CompaniiFarmaceuticeController {
         return "companii_farmaceutice";
     }
 
-    @PostMapping
-    public int saveCompanii(@RequestBody CompaniiFarmaceutice companie) {
-        return companiiFarmaceuticeService.saveCompanie(companie);
+    @GetMapping("/new")
+    public String showNewForm(Model model) {
+        CompaniiFarmaceutice companie = new CompaniiFarmaceutice();
+        model.addAttribute("companie", companie);
+        return "companie-form-insert";
+    }
+
+    @PostMapping("/save")
+    public String saveCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie) {
+        companiiFarmaceuticeService.insertCompanie(companie);
+        return "redirect:/companii_farmaceutice";
+    }
+
+    @PostMapping("/update")
+    public String updateCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie) {
+        companiiFarmaceuticeService.updateCompanie(companie);
+        return "redirect:/companii_farmaceutice";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") int id, Model model) {
+        CompaniiFarmaceutice companie = companiiFarmaceuticeService.findById(id);
+        model.addAttribute("companie", companie);
+        return "companie-form";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteCompanie(@PathVariable("id") int id) {
+        companiiFarmaceuticeService.deleteCompanie(id);
+        return "redirect:/companii_farmaceutice";
     }
 }

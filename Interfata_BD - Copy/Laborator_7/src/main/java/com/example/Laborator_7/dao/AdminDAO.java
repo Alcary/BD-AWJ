@@ -22,11 +22,12 @@ public class AdminDAO {
     }
 
     public int saveAdmin(Admin admin) {
-        String sql = "INSERT INTO admini (username, parola) VALUES (?, ?)";
+        String sql = "INSERT INTO admini (username, parola, rol) VALUES (?, ?, ?)";
 
         return jdbcTemplate.update(sql,
                 admin.getUsername(),
-                admin.getParola());
+                admin.getParola(),
+                admin.getRol());
     }
 
     public Admin findByUsername(String username) {
@@ -41,6 +42,7 @@ public class AdminDAO {
             admin.setIdAdmin(rs.getInt("id_admin"));
             admin.setUsername(rs.getString("username"));
             admin.setParola(rs.getString("parola"));
+            admin.setRol(rs.getString("rol"));
             return admin;
         }
     }

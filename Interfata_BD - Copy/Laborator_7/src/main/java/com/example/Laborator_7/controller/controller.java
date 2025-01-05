@@ -13,9 +13,4 @@ public class controller {
     public String index() {
         return "index";
     }
-
-    @GetMapping("/admin")
-    public String showAdminPage() {
-        return "admin";
-    }
 }

@@ -1,7 +1,6 @@
 package com.example.Laborator_7.service;
 
 import com.example.Laborator_7.dao.CompaniiFarmaceuticeDAO;
-import com.example.Laborator_7.entity.Admin;
 import com.example.Laborator_7.entity.CompaniiFarmaceutice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,19 @@ public class CompaniiFarmaceuticeService {
         return companiiFarmaceuticeDAO.findByNume(nume);
     }
 
-    public int saveCompanie(CompaniiFarmaceutice companiiFarmaceutice) {
-        return companiiFarmaceuticeDAO.saveCompanie(companiiFarmaceutice);
+    public CompaniiFarmaceutice findById(int id) {
+        return companiiFarmaceuticeDAO.findById(id);
+    }
+
+    public void updateCompanie(CompaniiFarmaceutice companiiFarmaceutice) {
+        companiiFarmaceuticeDAO.updateCompanie(companiiFarmaceutice);
+    }
+
+    public int insertCompanie(CompaniiFarmaceutice companiiFarmaceutice) {
+        return companiiFarmaceuticeDAO.insertCompanie(companiiFarmaceutice);
+    }
+
+    public void deleteCompanie(int id) {
+        companiiFarmaceuticeDAO.deleteCompanie(id);
     }
 }
