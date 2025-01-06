@@ -2,6 +2,7 @@ package com.example.Laborator_7.service;
 
 import com.example.Laborator_7.dao.Boli_AsociateDAO;
 import com.example.Laborator_7.entity.Boli_Asociate;
+import com.example.Laborator_7.entity.CompaniiFarmaceutice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,14 @@ public class Boli_AsociateService {
 
     public List<Boli_Asociate> findByNume(String nume) {
         return boli_asociateDAO.findByNume(nume);
+    }
+
+    public void validateBoala(Boli_Asociate boala) {
+        if (!boala.getNume().matches("^[a-zA-Z\\s.\\-șȘțȚăĂîÎâÂ]+$")) {
+            throw new IllegalArgumentException("Nume invalid: numele trebuie să conțină doar litere și spații.");
+        }
+        if (!boala.getTratament().matches("^.*$")) {
+            throw new IllegalArgumentException("Tratament invalid.");
+        }
     }
 }

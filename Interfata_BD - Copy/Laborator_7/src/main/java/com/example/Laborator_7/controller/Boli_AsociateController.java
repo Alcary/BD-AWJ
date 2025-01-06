@@ -36,15 +36,28 @@ public class Boli_AsociateController {
     }
 
     @PostMapping("/save")
-    public String saveBoalaAsociata(@ModelAttribute("boala") Boli_Asociate boala) {
-        boli_AsociateService.insertBoalaAsociata(boala);
-        return "redirect:/boli_asociate";
+    public String saveBoalaAsociata(@ModelAttribute("boala") Boli_Asociate boala, Model model) {
+        try{
+            boli_AsociateService.validateBoala(boala);
+            boli_AsociateService.insertBoalaAsociata(boala);
+            return "redirect:/boli_asociate";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "boli_asociate-form-insert";
+        }
     }
 
     @PostMapping("/update")
-    public String updateBoalaAsociata(@ModelAttribute("boala") Boli_Asociate boala) {
-        boli_AsociateService.updateBoalaAsociata(boala);
-        return "redirect:/boli_asociate";
+    public String updateBoalaAsociata(@ModelAttribute("boala") Boli_Asociate boala, Model model) {
+        try{
+            boli_AsociateService.validateBoala(boala);
+            boli_AsociateService.updateBoalaAsociata(boala);
+            return "redirect:/boli_asociate";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "boli_asociate-form";
+        }
+
     }
 
     @GetMapping("/edit/{id}")

@@ -2,7 +2,9 @@ package com.example.Laborator_7.service;
 
 import com.example.Laborator_7.dao.MedicamenteDAO;
 import com.example.Laborator_7.entity.Admin;
+import com.example.Laborator_7.entity.Medic;
 import com.example.Laborator_7.entity.Medicamente;
+import com.example.Laborator_7.entity.Pacient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +36,23 @@ public class MedicamenteService {
         return medicamenteDAO.findById(id);
     }
 
+    public List<Medicamente> findMedicamentByCompanieOras(String oras) {
+        return medicamenteDAO.findMedicamentByCompanieOras(oras);
+    }
+
     public void deleteMedicament(int id) {
         medicamenteDAO.deleteMedicament(id);
+    }
+
+    public void validateMedicament(Medicamente medicamente) {
+        if (!medicamente.getNumeMedicament().matches("^[a-zA-Z\\s.\\-șȘțȚăĂîÎâÂ]+$")) {
+            throw new IllegalArgumentException("Nume invalid: numele trebuie să conțină doar litere și spații.");
+        }
+        if (medicamente.getDurataTratament() < 0) {
+            throw new IllegalArgumentException("Durată invalidă: durata tratamentului trebuie să fie un număr pozitiv.");
+        }
+        if (medicamente.getIdCompanie() == null){
+            throw new IllegalArgumentException("ID-ul companiei invalid: trebuie să selectați o companie.");
+        }
     }
 }

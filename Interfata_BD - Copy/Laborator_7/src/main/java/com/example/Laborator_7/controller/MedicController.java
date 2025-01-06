@@ -1,6 +1,6 @@
 package com.example.Laborator_7.controller;
 
-import com.example.Laborator_7.entity.Apartinator;
+import com.example.Laborator_7.dao.MedicDAO;
 import com.example.Laborator_7.entity.Medic;
 import org.springframework.stereotype.Controller;
 import com.example.Laborator_7.service.MedicService;
@@ -16,6 +16,8 @@ public class MedicController {
 
     @Autowired
     private MedicService medicService;
+    @Autowired
+    private MedicDAO medicDAO;
 
     @GetMapping
     public String getAllMedics(Model model) {
@@ -34,6 +36,13 @@ public class MedicController {
         return "medici";
     }
 
+    @GetMapping("/searchSpital")
+    public String getMedicSpital(@RequestParam("spital") String spital, Model model) {
+        List<Medic> medici = medicService.findMedicBySpital(spital);
+        model.addAttribute("medici", medici);
+        return "medici";
+    }
+
     @GetMapping("/new")
     public String showNewForm(Model model) {
         Medic medic = new Medic();
@@ -42,15 +51,33 @@ public class MedicController {
     }
 
     @PostMapping("/save")
-    public String saveMedic(@ModelAttribute("medic") Medic medic) {
-        medicService.insertMedic(medic);
-        return "redirect:/medici";
+    public String saveMedic(@ModelAttribute("medic") Medic medic, Model model) {
+        try{
+            if (medic.getIdSupervizor() != null && medic.getIdSupervizor() == 0) {
+                medic.setIdSupervizor(null);
+            }
+            medicService.validateMedic(medic);
+            medicService.insertMedic(medic);
+            return "redirect:/medici";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "medic-form-insert";
+        }
     }
 
     @PostMapping("/update")
-    public String updateMedic(@ModelAttribute("medic") Medic medic) {
-        medicService.updateMedic(medic);
-        return "redirect:/medici";
+    public String updateMedic(@ModelAttribute("medic") Medic medic, Model model) {
+        try{
+            if (medic.getIdSupervizor() != null && medic.getIdSupervizor() == 0) {
+                medic.setIdSupervizor(null);
+            }
+            medicService.validateMedic(medic);
+            medicService.updateMedic(medic);
+            return "redirect:/medici";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "medic-form";
+        }
     }
 
     @GetMapping("/edit/{id}")

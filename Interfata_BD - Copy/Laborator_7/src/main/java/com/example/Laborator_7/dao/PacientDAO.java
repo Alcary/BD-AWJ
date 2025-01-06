@@ -1,6 +1,6 @@
 package com.example.Laborator_7.dao;
 
-import com.example.Laborator_7.entity.Patient;
+import com.example.Laborator_7.entity.Pacient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -12,22 +12,22 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class PatientDAO {
+public class PacientDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<Patient> getAllPatients() {
+    public List<Pacient> getAllPatients() {
         String sql = "SELECT P.*, CONCAT(M.Nume, ' ', M.Prenume) AS numeMedic, "+
                 "CONCAT(A.Nume, ' ', A.Prenume) AS NumeApartinator " +
                 "FROM pacienti P " +
                 "INNER JOIN medici M ON P.id_medic = M.id_medic " +
                 "INNER JOIN apartinatori A ON P.id_apartinator = A.id_apartinator " +
                 "ORDER BY P.ID_Pacient";
-        return jdbcTemplate.query(sql, new PatientRowMapper());
+        return jdbcTemplate.query(sql, new PacientRowMapper());
     }
 
-    public List<Patient> findByNume(String nume) {
+    public List<Pacient> findByNume(String nume) {
         String sql = "SELECT P.*, CONCAT(M.Nume, ' ', M.Prenume) AS numeMedic, " +
                 "CONCAT(A.Nume, ' ', A.Prenume) AS NumeApartinator " +
                 "FROM pacienti P " +
@@ -35,30 +35,26 @@ public class PatientDAO {
                 "INNER JOIN apartinatori A ON P.id_apartinator = A.id_apartinator " +
                 "WHERE P.nume LIKE CONCAT('%', ?, '%') OR P.prenume LIKE CONCAT('%', ?, '%') " +
                 "ORDER BY P.ID_Pacient";
-        return jdbcTemplate.query(sql, new PatientRowMapper(), nume, nume);
+        return jdbcTemplate.query(sql, new PacientRowMapper(), nume, nume);
     }
 
-    public int savePatient(Patient pacient) {
-        String sql = "INSERT INTO pacienti (Nume, Prenume, CNP, Sex, DataNasterii, " +
-                "DataInrolareProgram, Strada, NumarTelefon, Oras, Judet, ID_Medic, " +
-                "ID_Apartinator) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        return jdbcTemplate.update(sql,
-                pacient.getNume(),
-                pacient.getPrenume(),
-                pacient.getCnp(),
-                pacient.getSex(),
-                pacient.getDataNasterii(),
-                pacient.getDataInrolareProgram(),
-                pacient.getStrada(),
-                pacient.getNumarTelefon(),
-                pacient.getOras(),
-                pacient.getJudet(),
-                pacient.getId_medic(),
-                pacient.getId_apartinator());
+    public List<Pacient> findPacientBoala(String boala) {
+        String sql = "SELECT P.*, " +
+                "CONCAT(M.Nume, ' ', M.Prenume) AS numeMedic, " +
+                "CONCAT(A.Nume, ' ', A.Prenume) AS NumeApartinator " +
+                "FROM pacienti P " +
+                "INNER JOIN medici M ON P.id_medic = M.id_medic " +
+                "INNER JOIN apartinatori A ON P.id_apartinator = A.id_apartinator " +
+                "WHERE P.id_pacient IN ( " +
+                "   SELECT PB.id_pacient " +
+                "   FROM pacienti_boli PB " +
+                "   INNER JOIN boli_asociate B ON PB.id_boala = B.id_boala " +
+                "   WHERE B.nume LIKE CONCAT('%', ?, '%') " +
+                ")";
+        return jdbcTemplate.query(sql, new PacientRowMapper(), boala);
     }
 
-    public int updatePacient(Patient pacient) {
+    public int updatePacient(Pacient pacient) {
         String sql = "UPDATE pacienti SET Nume = ?, Prenume = ?, CNP = ?, " +
                 "Sex = ?, DataNasterii = ?, DataInrolareProgram = ?, Strada = ?, " +
                 "NumarTelefon = ?, Oras = ?, Judet = ?, id_medic = ?, id_apartinator = ? WHERE id_pacient = ?";
@@ -78,7 +74,7 @@ public class PatientDAO {
                 pacient.getId_pacient());
     }
 
-    public int insertPacient(Patient pacient) {
+    public int insertPacient(Pacient pacient) {
         String sql = "INSERT INTO pacienti (Nume, Prenume, CNP, Sex, DataNasterii, DataInrolareProgram, Strada, NumarTelefon, Oras, Judet, id_medic, id_apartinator) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         return jdbcTemplate.update(sql,
                 pacient.getNume(),
@@ -95,24 +91,14 @@ public class PatientDAO {
                 pacient.getId_apartinator());
     }
 
-    public void addMedicamentForPacient(int id_pacient, int id_medicament, java.sql.Date datastarttratament) {
-        String sql = "INSERT INTO pacienti_medicamente (id_pacient, id_medicament, datastarttratament) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, id_pacient, id_medicament, datastarttratament);
-    }
-
-    public void addBoalaForPacient(int id_pacient, int id_boala, java.sql.Date dataaparitie) {
-        String sql = "INSERT INTO pacienti_boli (id_pacient, id_boala, dataaparitie) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, id_pacient, id_boala, dataaparitie);
-    }
-
-    public Patient findById(int id) {
+    public Pacient findById(int id) {
         String sql = "SELECT P.*, CONCAT(M.Nume, ' ', M.Prenume) AS numeMedic, " +
                 "CONCAT(A.Nume, ' ', A.Prenume) AS NumeApartinator " +
                 "FROM pacienti P " +
                 "INNER JOIN medici M ON P.id_medic = M.id_medic " +
                 "INNER JOIN apartinatori A ON P.id_apartinator = A.id_apartinator " +
                 "WHERE P.id_pacient = ?";
-        return jdbcTemplate.queryForObject(sql, new PatientDAO.PatientRowMapper(), id);
+        return jdbcTemplate.queryForObject(sql, new PacientDAO.PacientRowMapper(), id);
     }
 
     public void deletePacient(int id) {
@@ -140,26 +126,26 @@ public class PatientDAO {
         return jdbcTemplate.queryForList(sql, id);
     }
 
-    private static class PatientRowMapper implements RowMapper<Patient> {
+    private static class PacientRowMapper implements RowMapper<Pacient> {
         @Override
-        public Patient mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Patient patient = new Patient();
-            patient.setId_pacient(rs.getInt("ID_Pacient"));
-            patient.setNume(rs.getString("Nume"));
-            patient.setPrenume(rs.getString("Prenume"));
-            patient.setCnp(rs.getString("CNP"));
-            patient.setSex(rs.getString("Sex"));
-            patient.setDataNasterii(rs.getDate("DataNasterii"));
-            patient.setDataInrolareProgram(rs.getDate("DataInrolareProgram"));
-            patient.setStrada(rs.getString("Strada"));
-            patient.setNumarTelefon(rs.getString("NumarTelefon"));
-            patient.setOras(rs.getString("Oras"));
-            patient.setJudet(rs.getString("Judet"));
-            patient.setId_medic(rs.getInt("ID_Medic"));
-            patient.setId_apartinator(rs.getInt("ID_Apartinator"));
-            patient.setMedicNume(rs.getString("numeMedic"));
-            patient.setApartinatorNume(rs.getString("NumeApartinator"));
-            return patient;
+        public Pacient mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Pacient pacient = new Pacient();
+            pacient.setId_pacient(rs.getInt("ID_Pacient"));
+            pacient.setNume(rs.getString("Nume"));
+            pacient.setPrenume(rs.getString("Prenume"));
+            pacient.setCnp(rs.getString("CNP"));
+            pacient.setSex(rs.getString("Sex"));
+            pacient.setDataNasterii(rs.getDate("DataNasterii"));
+            pacient.setDataInrolareProgram(rs.getDate("DataInrolareProgram"));
+            pacient.setStrada(rs.getString("Strada"));
+            pacient.setNumarTelefon(rs.getString("NumarTelefon"));
+            pacient.setOras(rs.getString("Oras"));
+            pacient.setJudet(rs.getString("Judet"));
+            pacient.setId_medic(rs.getInt("ID_Medic"));
+            pacient.setId_apartinator(rs.getInt("ID_Apartinator"));
+            pacient.setMedicNume(rs.getString("numeMedic"));
+            pacient.setApartinatorNume(rs.getString("NumeApartinator"));
+            return pacient;
         }
     }
 }

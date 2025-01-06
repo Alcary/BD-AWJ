@@ -50,6 +50,22 @@ public class MedicDAO {
         return jdbcTemplate.queryForObject(sql, new MedicRowMapper(), id);
     }
 
+    public List<Medic> findMedicBySpital(String spital) {
+        String sql = "SELECT M.*, " +
+                "       CONCAT(S.Nume, ' ', S.Prenume) AS numeSupervizor, " +
+                "       SP.Nume AS numeSpital " +
+                "FROM medici M " +
+                "LEFT JOIN medici S ON M.id_supervisor = S.id_medic " +
+                "INNER JOIN spitale SP ON M.id_spital = SP.id_spital " +
+                "WHERE M.id_spital IN ( " +
+                "    SELECT S.id_spital " +
+                "    FROM spitale S " +
+                "    WHERE S.Nume LIKE CONCAT('%', ?, '%') " +
+                ") " +
+                "ORDER BY M.ID_Medic";
+        return jdbcTemplate.query(sql, new MedicRowMapper(), spital);
+    }
+
     public int insertMedic(Medic medic){
         String sql = "INSERT INTO medici (Nume, Prenume, CNP, Sex, numartelefon, " +
             "oras, judet, id_supervisor, id_spital) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";

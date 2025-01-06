@@ -1,5 +1,7 @@
 package com.example.Laborator_7.entity;
 
+import jakarta.annotation.Nullable;
+
 public class Medicamente {
     private int idMedicament;
 
@@ -7,9 +9,10 @@ public class Medicamente {
 
     private int durataTratament;
 
-    private int idCompanie;
-
     private String numeCompanie;
+
+    @Nullable
+    private Integer idCompanie;
 
     public int getIdMedicament() {
         return idMedicament;
@@ -35,11 +38,11 @@ public class Medicamente {
         return durataTratament;
     }
 
-    public void setIdCompanie(int idCompanie) {
+    public void setIdCompanie(Integer idCompanie) {
         this.idCompanie = idCompanie;
     }
 
-    public int getIdCompanie() {
+    public Integer getIdCompanie() {
         return idCompanie;
     }
 

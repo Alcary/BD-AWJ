@@ -39,6 +39,18 @@ public class MedicamenteDAO {
         return jdbcTemplate.queryForObject(sql, new MedicamentRowMapper(), id);
     }
 
+    public List<Medicamente> findMedicamentByCompanieOras(String oras) {
+        String sql = "SELECT M.*, " +
+                "C.Nume AS NumeCompanie " +
+                "FROM medicamente M " +
+                "INNER JOIN companii_farmaceutice C ON M.id_companie = C.id_companie " +
+                "WHERE M.id_companie IN ( " +
+                "   SELECT C.id_companie " +
+                "   FROM companii_farmaceutice C " +
+                "   WHERE C.oras LIKE CONCAT('%', ?, '%'))";
+        return jdbcTemplate.query(sql, new MedicamentRowMapper(), oras);
+    }
+
     public int insertMedicament(Medicamente medicament) {
         String sql = "INSERT INTO medicamente (nume, duratatratament, id_companie) " +
                 "VALUES (?, ?, ?)";

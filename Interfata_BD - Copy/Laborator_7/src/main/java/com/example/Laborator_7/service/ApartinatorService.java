@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Pattern;
+
 
 @Service
 public class ApartinatorService {
@@ -35,5 +37,17 @@ public class ApartinatorService {
 
     public int updateApartinator(Apartinator apartinator) {
         return apartinatorDAO.updateApartinator(apartinator);
+    }
+
+    public void validateApartinator(Apartinator apartinator) {
+        if (!apartinator.getNume().matches("^[a-zA-Z\\s.\\-șȘțȚăĂîÎâÂ]+$")) {
+            throw new IllegalArgumentException("Nume invalid: numele trebuie să conțină doar litere și spații.");
+        }
+        if (!apartinator.getPrenume().matches("^[a-zA-Z\\s.\\-șȘțȚăĂîÎâÂ]+$")){
+            throw new IllegalArgumentException("Prenume invalid: prenumele trebuie să conțină doar litere și spații.");
+        }
+        if (!apartinator.getNumarTelefon().matches("^\\+?[0-9]{10,15}$")) {
+            throw new IllegalArgumentException("Număr de telefon invalid.");
+        }
     }
 }

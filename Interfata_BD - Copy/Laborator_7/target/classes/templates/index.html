@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pacienți Test</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Pacienti Test</title>
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body, html {
             font-family: Arial, sans-serif;
@@ -18,11 +18,12 @@
             text-align: center;
             color: #333;
             margin: 20px 0;
+            font-size: 4em;
+            font-weight: bold;
         }
 
         .navbar {
             display: flex;
-            flex-wrap: wrap; /* Allows the navbar to wrap */
             justify-content: space-between;
             align-items: center;
             background-color: #333;
@@ -40,7 +41,6 @@
         .navbar .nav-links {
             display: flex;
             gap: 15px;
-            flex-grow: 1; /* Makes the links use available space */
         }
 
         .navbar button {
@@ -58,12 +58,16 @@
         }
 
         .navbar .logout-button {
-            background-color: #d9534f; /* Bootstrap danger color for logout */
+            background-color: #d9534f;
             border-color: #d43f3a;
         }
 
         .navbar .logout-button:hover {
             background-color: #c9302c;
+        }
+
+        .logout-container {
+            margin-left: auto; /* Pushes the logout button to the far right */
         }
 
         .content {
@@ -72,20 +76,14 @@
             padding: 20px;
         }
 
-        /* Media Query for smaller devices */
         @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .navbar .nav-links {
+            .navbar .nav-links, .logout-container {
                 flex-direction: column;
                 align-items: flex-start;
                 width: 100%;
             }
 
-            .navbar button {
+            .navbar button, .navbar form {
                 width: 100%;
                 margin-bottom: 5px;
             }
@@ -106,13 +104,28 @@
         <button onclick="window.location.href='/companii_farmaceutice'">Companii Farmaceutice</button>
         <button onclick="window.location.href='/boli_asociate'">Boli Asociate</button>
     </div>
-    <form action="/logout" method="post">
-        <button type="submit" class="logout-button">Logout</button>
-    </form>
+    <div class="logout-container">
+        <form action="/logout" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
 </div>
 
-<div class="content">
-    <h1>Bază de date pacienți</h1>
+<div style="position: relative;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/Trial_1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/Trial_2.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="content" style="position: absolute; top: 15%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+        <h1>Bază de date pacienți</h1>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

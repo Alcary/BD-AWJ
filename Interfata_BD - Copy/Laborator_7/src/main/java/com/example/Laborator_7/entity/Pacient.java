@@ -1,10 +1,8 @@
-// Patient.java
 package com.example.Laborator_7.entity;
 
 import jakarta.annotation.Nullable;
-import jakarta.validation.constraints.Null;
 
-public class Patient{
+public class Pacient {
     private int id_pacient;
 
     private String nume;

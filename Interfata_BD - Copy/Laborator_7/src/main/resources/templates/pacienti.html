@@ -46,24 +46,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="patient : ${pacienti}">
-            <td th:text="${patient.nume}">Nume</td>
-            <td th:text="${patient.prenume}">Prenume</td>
-            <td th:text="${patient.cnp}">CNP</td>
-            <td th:text="${patient.sex}">Sex</td>
-            <td class="nowrap" th:text="${patient.dataNasterii}">Data Nașterii</td>
-            <td class="nowrap" th:text="${patient.dataInrolareProgram}">Data Înrolării</td>
-            <td th:text="${patient.strada}">Strada</td>
-            <td th:text="${patient.numarTelefon}">Telefon</td>
-            <td th:text="${patient.oras}">Oraș</td>
-            <td th:text="${patient.judet}">Județ</td>
-            <td th:text="${patient.numeMedic}">Medic</td>
-            <td th:text="${patient.numeApartinator}">Aparținător</td>
+        <tr th:each="pacient : ${pacienti}">
+            <td th:text="${pacient.nume}">Nume</td>
+            <td th:text="${pacient.prenume}">Prenume</td>
+            <td th:text="${pacient.cnp}">CNP</td>
+            <td th:text="${pacient.sex}">Sex</td>
+            <td class="nowrap" th:text="${pacient.dataNasterii}">Data Nașterii</td>
+            <td class="nowrap" th:text="${pacient.dataInrolareProgram}">Data Înrolării</td>
+            <td th:text="${pacient.strada}">Strada</td>
+            <td th:text="${pacient.numarTelefon}">Telefon</td>
+            <td th:text="${pacient.oras}">Oraș</td>
+            <td th:text="${pacient.judet}">Județ</td>
+            <td th:text="${pacient.numeMedic}">Medic</td>
+            <td th:text="${pacient.numeApartinator}">Aparținător</td>
             <td>
-                <a th:href="@{/pacienti/detalii/{id}(id=${patient.id_pacient})}" class="btn btn-info btn-sm">Detalii Teste</a>
-                <a th:href="@{/pacienti/istoric/{id}(id=${patient.id_pacient})}" class="btn btn-info btn-sm">Istoric Medical</a>
-                <a th:href="@{/pacienti/edit/{id}(id=${patient.id_pacient})}" class="btn btn-warning btn-sm">Editează</a>
-                <a th:href="@{/pacienti/delete/{id}(id=${patient.id_pacient})}" class="btn btn-danger btn-sm" onclick="return confirm('Ești sigur că vrei să ștergi acest pacient?')">Șterge</a>
+                <a th:href="@{/pacienti/detalii/{id}(id=${pacient.id_pacient})}" class="btn btn-info btn-sm">Detalii Teste</a>
+                <a th:href="@{/pacienti/istoric/{id}(id=${pacient.id_pacient})}" class="btn btn-info btn-sm">Istoric Medical</a>
+                <a th:href="@{/pacienti/edit/{id}(id=${pacient.id_pacient})}" class="btn btn-warning btn-sm">Editează</a>
+                <a th:href="@{/pacienti/delete/{id}(id=${pacient.id_pacient})}" class="btn btn-danger btn-sm" onclick="return confirm('Ești sigur că vrei să ștergi acest pacient?')">Șterge</a>
             </td>
         </tr>
         </tbody>

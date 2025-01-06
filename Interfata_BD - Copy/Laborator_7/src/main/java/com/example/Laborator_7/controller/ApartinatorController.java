@@ -31,15 +31,27 @@ public class ApartinatorController {
     }
 
     @PostMapping("/save")
-    public String saveApartinator(@ModelAttribute("apartinator") Apartinator apartinator) {
-        apartinatorService.insertApartinator(apartinator);
-        return "redirect:/apartinatori";
+    public String saveApartinator(@ModelAttribute("apartinator") Apartinator apartinator, Model model) {
+        try{
+            apartinatorService.validateApartinator(apartinator);
+            apartinatorService.insertApartinator(apartinator);
+            return "redirect:/apartinatori";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "apartinator-form-insert";
+        }
     }
 
     @PostMapping("/update")
-    public String updateApartinator(@ModelAttribute("apartinator") Apartinator apartinator) {
-        apartinatorService.updateApartinator(apartinator);
-        return "redirect:/apartinatori";
+    public String updateApartinator(@ModelAttribute("apartinator") Apartinator apartinator, Model model) {
+        try{
+            apartinatorService.validateApartinator(apartinator);
+            apartinatorService.updateApartinator(apartinator);
+            return "redirect:/apartinatori";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "apartinator-form";
+        }
     }
 
     @GetMapping("/edit/{id}")

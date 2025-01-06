@@ -1,8 +1,6 @@
 package com.example.Laborator_7.dao;
 
-import com.example.Laborator_7.entity.Admin;
 import com.example.Laborator_7.entity.CompaniiFarmaceutice;
-import com.example.Laborator_7.service.CompaniiFarmaceuticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

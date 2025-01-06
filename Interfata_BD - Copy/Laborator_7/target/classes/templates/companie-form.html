@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Companie Farmaceutică</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-
+<div th:if="${errorMessage}" class="alert alert-danger">
+    <p th:text="${errorMessage}"></p>
+</div>
+<div class="container mt-4">
+    <h1 class="mb-4">Editează Companie Farmaceutică</h1>
+    <form th:action="@{/companii_farmaceutice/update}" th:object="${companie}" method="post" class="needs-validation" novalidate>
+        <div class = "mb-3">
+            <label for="id_companie" class="form-label">ID:</label>
+            <input type="text" class="form-control" id="id_companie" th:field="*{idCompanieFarmaceutica}" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="nume" class="form-label">Nume:</label>
+            <input type="text" class="form-control" id="nume" th:field="*{nume}" required>
+            <div class="invalid-feedback">
+                Introduceți un nume valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="strada" class="form-label">Strada:</label>
+            <input type="text" class="form-control" id="strada" th:field="*{strada}" required>
+            <div class="invalid-feedback">
+                Introduceți o stradă validă.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="oras" class="form-label">Oraș:</label>
+            <input type="text" class="form-control" id="oras" th:field="*{oras}" required>
+            <div class="invalid-feedback">
+                Introduceți un oraș valid.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="tara" class="form-label">Strada:</label>
+            <input type="text" class="form-control" id="tara" th:field="*{tara}" required>
+            <div class="invalid-feedback">
+                Introduceți o țară validă.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvează</button>
+        <button type="button" class="btn btn-danger" onclick="window.location.href='/companii_farmaceutice'">Anulează</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 package com.example.Laborator_7.controller;
 
-import com.example.Laborator_7.entity.Apartinator;
 import com.example.Laborator_7.entity.CompaniiFarmaceutice;
 import com.example.Laborator_7.service.CompaniiFarmaceuticeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,15 +42,27 @@ public class CompaniiFarmaceuticeController {
     }
 
     @PostMapping("/save")
-    public String saveCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie) {
-        companiiFarmaceuticeService.insertCompanie(companie);
-        return "redirect:/companii_farmaceutice";
+    public String saveCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie, Model model) {
+        try{
+            companiiFarmaceuticeService.validateCompanie(companie);
+            companiiFarmaceuticeService.insertCompanie(companie);
+            return "redirect:/companii_farmaceutice";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "companie-form-insert";
+        }
     }
 
     @PostMapping("/update")
-    public String updateCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie) {
-        companiiFarmaceuticeService.updateCompanie(companie);
-        return "redirect:/companii_farmaceutice";
+    public String updateCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie, Model model) {
+        try{
+            companiiFarmaceuticeService.validateCompanie(companie);
+            companiiFarmaceuticeService.updateCompanie(companie);
+            return "redirect:/companii_farmaceutice";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "companie-form";
+        }
     }
 
     @GetMapping("/edit/{id}")

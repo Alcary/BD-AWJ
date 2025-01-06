@@ -1,9 +1,7 @@
 package com.example.Laborator_7.controller;
 
-import com.example.Laborator_7.entity.Apartinator;
-import com.example.Laborator_7.entity.Medic;
+import com.example.Laborator_7.dao.MedicamenteDAO;
 import com.example.Laborator_7.entity.Medicamente;
-import com.example.Laborator_7.entity.Spital;
 import com.example.Laborator_7.service.MedicamenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +16,8 @@ public class MedicamenteController {
 
     @Autowired
     private MedicamenteService medicamenteService;
+    @Autowired
+    private MedicamenteDAO medicamenteDAO;
 
     @GetMapping
     public String getAllMedicamente(Model model) {
@@ -36,6 +36,13 @@ public class MedicamenteController {
         return "medicamente";
     }
 
+    @GetMapping("/searchCompanieOras")
+    public String getMedicamenteOras(@RequestParam("oras") String oras, Model model) {
+        List<Medicamente> medicamente = medicamenteService.findMedicamentByCompanieOras(oras);
+        model.addAttribute("medicamente", medicamente);
+        return "medicamente";
+    }
+
     @GetMapping("/new")
     public String showNewForm(Model model) {
         Medicamente medicamente = new Medicamente();
@@ -44,15 +51,27 @@ public class MedicamenteController {
     }
 
     @PostMapping("/save")
-    public String saveMedicament(@ModelAttribute("medicamente") Medicamente medicamente) {
-        medicamenteService.insertMedicament(medicamente);
-        return "redirect:/medicamente";
+    public String saveMedicament(@ModelAttribute("medicamente") Medicamente medicamente, Model model) {
+        try{
+            medicamenteService.validateMedicament(medicamente);
+            medicamenteService.insertMedicament(medicamente);
+            return "redirect:/medicamente";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "medicamente-form-insert";
+        }
     }
 
     @PostMapping("/update")
-    public String updateMedicament(@ModelAttribute("medicamente") Medicamente medicamente) {
-        medicamenteService.updateMedicament(medicamente);
-        return "redirect:/medicamente";
+    public String updateMedicament(@ModelAttribute("medicamente") Medicamente medicamente, Model model) {
+        try{
+            medicamenteService.validateMedicament(medicamente);
+            medicamenteService.updateMedicament(medicamente);
+            return "redirect:/medicamente";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "medicamente-form";
+        }
     }
 
     @GetMapping("/edit/{id}")

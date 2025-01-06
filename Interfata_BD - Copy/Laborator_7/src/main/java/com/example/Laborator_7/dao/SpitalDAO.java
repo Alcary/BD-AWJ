@@ -45,6 +45,17 @@ public class SpitalDAO {
                 spital.getNumarTelefon());
     }
 
+    public List<Spital> findTopSpitale() {
+        String sql = "SELECT S.* " +
+                "FROM spitale S " +
+                "ORDER BY (SELECT COUNT(*) " +
+                "          FROM medici M " +
+                "          WHERE M.id_spital = S.id_spital) DESC " +
+                "LIMIT 3";
+
+        return jdbcTemplate.query(sql, new SpitalRowMapper());
+    }
+
     public int updateSpital(Spital spital) {
         String sql = "UPDATE spitale SET Nume = ?, Strada = ?, Oras = ?, Judet = ?, " +
                 "NumarTelefon = ? WHERE id_spital = ?";

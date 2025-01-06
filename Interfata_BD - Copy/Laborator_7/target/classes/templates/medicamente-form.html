@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,9 @@
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
+<div th:if="${errorMessage}" class="alert alert-danger">
+  <p th:text="${errorMessage}"></p>
+</div>
 <div class="container mt-4">
   <h1 class="mb-4">Editează Medicament</h1>
   <form th:action="@{/medicamente/update}" th:object="${medicamente}" method="post" class="needs-validation" novalidate>
@@ -24,7 +27,7 @@
     </div>
     <div class="mb-3">
       <label for="durataTratament" class="form-label">Durată Tratament (zile):</label>
-      <input type="text" class="form-control" id="durataTratament" th:field="*{durataTratament}" required>
+      <input type="number" class="form-control" id="durataTratament" th:field="*{durataTratament}" required>
       <div class="invalid-feedback">
         Introduceți un interval valid.
       </div>

@@ -1,7 +1,6 @@
 package com.example.Laborator_7.controller;
 
-import com.example.Laborator_7.entity.Apartinator;
-import com.example.Laborator_7.entity.Medic;
+import com.example.Laborator_7.dao.SpitalDAO;
 import com.example.Laborator_7.entity.Spital;
 import com.example.Laborator_7.service.SpitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,8 @@ public class SpitalController {
 
     @Autowired
     private SpitalService spitalService;
+    @Autowired
+    private SpitalDAO spitalDAO;
 
     @GetMapping
     public String getAllSpitale(Model model) {
@@ -43,15 +44,34 @@ public class SpitalController {
     }
 
     @PostMapping("/save")
-    public String saveSpital(@ModelAttribute("spital") Spital spital) {
-        spitalService.insertSpital(spital);
-        return "redirect:/spitale";
+    public String saveSpital(@ModelAttribute("spital") Spital spital, Model model) {
+        try{
+            spitalService.validateSpital(spital);
+            spitalService.insertSpital(spital);
+            return "redirect:/spitale";
+        }catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "spital-form-insert";
+        }
+    }
+
+    @GetMapping("/topSpitale")
+    public String getTopSpitale(Model model) {
+        List<Spital> topSpitale = spitalService.findTopSpitale();
+        model.addAttribute("spitale", topSpitale);
+        return "spitale";
     }
 
     @PostMapping("/update")
-    public String updateSpital(@ModelAttribute("spital") Spital spital) {
-        spitalService.updateSpital(spital);
-        return "redirect:/spitale";
+    public String updateSpital(@ModelAttribute("spital") Spital spital, Model model) {
+        try{
+            spitalService.validateSpital(spital);
+            spitalService.updateSpital(spital);
+            return "redirect:/spitale";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "spital-form";
+        }
     }
 
     @GetMapping("/edit/{id}")
