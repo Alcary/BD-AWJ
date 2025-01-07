@@ -16,7 +16,10 @@ package com.example.Laborator_7.controller;
         private AdminService adminService;
 
         @GetMapping
-        public String showLoginPage() {
+        public String showLoginPage(@RequestParam(value = "error", required = false) String error, Model model) {
+            if (error != null){
+                model.addAttribute("errorMessage", "Credențialele introduse sunt incorecte");
+            }
             return "login";
         }
 
@@ -28,7 +31,7 @@ package com.example.Laborator_7.controller;
                 return "redirect:/admin";
             }
             else{
-                model.addAttribute("errorMessage", "Credențialele introduse sunt incorecte");
+                model.addAttribute("errorMessage", "Credențialele introduse sunt incorecte!");
                 return "login";
             }
         }
