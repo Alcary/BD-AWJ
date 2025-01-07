@@ -1,3 +1,4 @@
+//Serviciu care incarca detaliile unui admin pe baza numelui de utilizator
 package com.example.Laborator_7.service;
 
 import com.example.Laborator_7.dao.AdminDAO;
@@ -18,14 +19,21 @@ public class CustomAdminDetailsService implements UserDetailsService {
     @Autowired
     private AdminDAO adminDAO;
 
+    //Incarca detaliile unui admin pe baza numelui de utilizator
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //Cauta adminul in baza de date folosind numele de utilizator
         Admin admin = adminDAO.findByUsername(username);
         if (admin == null) {
+            //Arunca o exceptie daca adminul nu este gasit
             throw new UsernameNotFoundException("Admin not found");
         }
 
-        return new User(admin.getUsername(), admin.getParola(),
-                Collections.singletonList(new SimpleGrantedAuthority(admin.getRol())));
+        //Creeaza un obiect UserDetails pentru autentificare
+        return new User(
+                admin.getUsername(),
+                admin.getParola(),
+                Collections.singletonList(new SimpleGrantedAuthority(admin.getRol()))
+        );
     }
 }

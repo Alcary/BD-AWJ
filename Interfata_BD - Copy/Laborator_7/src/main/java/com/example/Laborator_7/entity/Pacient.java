@@ -1,3 +1,4 @@
+//Entitatea Pacient cu atributele din tabel si gettere si settere pentru acestea
 package com.example.Laborator_7.entity;
 
 import jakarta.annotation.Nullable;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Medicamente</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div th:if="${errorMessage}" class="alert alert-danger">
+  <p th:text="${errorMessage}"></p>
+</div>
+<div class="container mt-4">
+  <h1 class="mb-4">Editează Medicament</h1>
+  <form th:action="@{/medicamente/update}" th:object="${medicamente}" method="post" class="needs-validation" novalidate>
+    <div class = "mb-3">
+      <label for="idMedicament" class="form-label">ID:</label>
+      <input type="text" class="form-control" id="idMedicament" th:field="*{idMedicament}" readonly>
+    </div>
+    <div class="mb-3">
+      <label for="numeMedicament" class="form-label">Nume:</label>
+      <input type="text" class="form-control" id="numeMedicament" th:field="*{numeMedicament}" required>
+      <div class="invalid-feedback">
+        Introduceți un nume valid.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="durataTratament" class="form-label">Durată Tratament (zile):</label>
+      <input type="number" class="form-control" id="durataTratament" th:field="*{durataTratament}" required>
+      <div class="invalid-feedback">
+        Introduceți un interval valid.
+      </div>
+    </div>
+  <div class="mb-3">
+      <label for="idCompanie" class="form-label">ID Companie:</label>
+        <input type="number" class="form-control" id="idCompanie" th:field="*{idCompanie}" required>
+        <div class="invalid-feedback">
+          Introduceți un ID valid.
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvează</button>
+    <button type="button" class="btn btn-danger" onclick="window.location.href='/medicamente'">Anulează</button>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

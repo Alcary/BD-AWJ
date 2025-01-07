@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adaugă Pacient</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
+<div th:if="${errorMessage}" class="alert alert-danger">
+    <p th:text="${errorMessage}"></p>
+</div>
 <div class="container mt-4">
     <h1 class="mb-4">Adaugă Pacient</h1>
     <form th:action="@{/pacienti/save}" th:object="${pacient}" method="post" class="needs-validation" novalidate>
@@ -96,27 +100,6 @@
             <input type="number" class="form-control" id="id_apartinator" th:field="*{id_apartinator}" min="1" step="1">
             <div class="invalid-feedback">
                 Introduceți un ID valid.
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Medicamente:</label>
-            <div th:each="medicament : ${medicamente}">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" th:value="${medicament.id}" th:name="medicamenteIds" th:id="${'medicament-' + medicament.id}">
-                    <label class="form-check-label" th:for="${'medicament-' + medicament.id}" th:text="${medicament.nume}"></label>
-                    <input type="date" class="form-control" th:name="${'dataStartTratament-' + medicament.id}">
-                </div>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Boli:</label>
-            <div th:each="boala : ${boli}">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" th:value="${boala.id}" th:name="boliIds" th:id="${'boala-' + boala.id}">
-                    <label class="form-check-label" th:for="${'boala-' + boala.id}" th:text="${boala.nume}"></label>
-                    <input type="date" class="form-control" th:name="${'dataAparitie-' + boala.id}">
-                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Salvează</button>

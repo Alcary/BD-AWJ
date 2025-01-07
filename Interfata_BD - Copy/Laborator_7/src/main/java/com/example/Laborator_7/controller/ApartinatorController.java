@@ -1,3 +1,4 @@
+//Este un controller care se ocupa de gestionarea cererilor legate de apartinatori
 package com.example.Laborator_7.controller;
 
 import com.example.Laborator_7.entity.Apartinator;
@@ -16,6 +17,7 @@ public class ApartinatorController {
     @Autowired
     private ApartinatorService apartinatorService;
 
+    //Returneaza toti apartinatorii si ii afiseaza intr-o lista pe pagina web
     @GetMapping
     public String getAllApartinatori(Model model) {
         List<Apartinator> apartinatori = apartinatorService.getAllApartinatori();
@@ -23,6 +25,7 @@ public class ApartinatorController {
         return "apartinatori";
     }
 
+    //Afiseaza formularul pentru adaugarea unui nou apartinator
     @GetMapping("/new")
     public String showNewForm(Model model) {
         Apartinator apartinator = new Apartinator();
@@ -30,6 +33,7 @@ public class ApartinatorController {
         return "apartinator-form-insert";
     }
 
+    //Proceseaza salvarea unui apartinator nou sau actualizat
     @PostMapping("/save")
     public String saveApartinator(@ModelAttribute("apartinator") Apartinator apartinator, Model model) {
         try{
@@ -42,6 +46,7 @@ public class ApartinatorController {
         }
     }
 
+    //Proceseaza actualizarea unui apartinator
     @PostMapping("/update")
     public String updateApartinator(@ModelAttribute("apartinator") Apartinator apartinator, Model model) {
         try{
@@ -54,6 +59,7 @@ public class ApartinatorController {
         }
     }
 
+    //Afiseaza formularul de editare pentru un apartinator specific
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int id, Model model) {
         Apartinator apartinator = apartinatorService.findById(id);
@@ -61,12 +67,14 @@ public class ApartinatorController {
         return "apartinator-form";
     }
 
+    //Sterge un apartinator si redirectioneaza la lista de apartinatori
     @GetMapping("/delete/{id}")
     public String deleteApartinator(@PathVariable("id") int id) {
         apartinatorService.deleteApartinator(id);
         return "redirect:/apartinatori";
     }
 
+    //Cauta apartinatori dupa nume si afiseaza rezultatele
     @GetMapping("/search")
     public String findByNume(@RequestParam("nume") String nume, Model model) {
         if(nume == null || nume.isEmpty()) {

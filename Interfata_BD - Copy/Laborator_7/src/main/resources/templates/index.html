@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pacienti Test</title>
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
+        body, html {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -16,9 +18,10 @@
             text-align: center;
             color: #333;
             margin: 20px 0;
+            font-size: 4em;
+            font-weight: bold;
         }
 
-        /* Navbar styles */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -30,13 +33,8 @@
             z-index: 1000;
         }
 
-        .navbar .logo {
-            display: flex;
-            align-items: center;
-        }
-
         .navbar .logo img {
-            height: 40px; /* Adjust as needed */
+            height: 40px;
             margin-right: 20px;
         }
 
@@ -53,27 +51,42 @@
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
-            transition: background-color 0.3s ease;
         }
 
         .navbar button:hover {
             background-color: #777;
         }
 
-        .navbar .login-btn {
-            margin-left: auto;
-            background-color: #007BFF;
-            font-weight: bold;
+        .navbar .logout-button {
+            background-color: #d9534f;
+            border-color: #d43f3a;
         }
 
-        .navbar .login-btn:hover {
-            background-color: #0056b3;
+        .navbar .logout-button:hover {
+            background-color: #c9302c;
+        }
+
+        .logout-container {
+            margin-left: auto; /* Pushes the logout button to the far right */
         }
 
         .content {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: auto;
             padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links, .logout-container {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+
+            .navbar button, .navbar form {
+                width: 100%;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -91,12 +104,28 @@
         <button onclick="window.location.href='/companii_farmaceutice'">Companii Farmaceutice</button>
         <button onclick="window.location.href='/boli_asociate'">Boli Asociate</button>
     </div>
-    <button class="login-btn" onclick="window.location.href='/login'">Log In Admin</button>
+    <div class="logout-container">
+        <form action="/logout" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
 </div>
 
-<!-- Main Content -->
-<div class="content">
-    <h1>Bază de date pacienți</h1>
+<div style="position: relative;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/images/Trial_1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="/images/Trial_2.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+    <div class="content" style="position: absolute; top: 15%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
+        <h1>Bază de date pacienți</h1>
+    </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

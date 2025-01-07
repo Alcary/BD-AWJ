@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista Medicilor</title>
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <div class="container my-4">
@@ -14,6 +14,10 @@
   <div class="d-flex justify-content-between mb-3">
     <form class="d-flex" action="/medici/search" method="get">
       <input type="text" class="form-control me-2" name="nume" placeholder="Caută după nume medic..." />
+      <button type="submit" class="btn btn-primary">Caută</button>
+    </form>
+    <form class="d-flex" action="/medici/searchSpital" method="get">
+      <input type="text" class="form-control me-2" name="spital" placeholder="Caută după spital..." />
       <button type="submit" class="btn btn-primary">Caută</button>
     </form>
     <a href="/" class="btn btn-success">Revino pe pagina principală</a>

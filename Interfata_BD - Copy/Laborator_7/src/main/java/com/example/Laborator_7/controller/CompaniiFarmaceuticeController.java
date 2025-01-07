@@ -1,9 +1,9 @@
+//Este un controller care se ocupa de gestionarea cererilor legate de companii farmaceutice
 package com.example.Laborator_7.controller;
 
 import com.example.Laborator_7.entity.CompaniiFarmaceutice;
 import com.example.Laborator_7.service.CompaniiFarmaceuticeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +17,7 @@ public class CompaniiFarmaceuticeController {
     @Autowired
     private CompaniiFarmaceuticeService companiiFarmaceuticeService;
 
+    //Returneaza toate companiile farmaceutice si le afiseaza intr-o lista pe pagina web
     @GetMapping
     public String getAllCompanii(Model model) {
         List<CompaniiFarmaceutice> companii = companiiFarmaceuticeService.getAllCompanii();
@@ -24,6 +25,7 @@ public class CompaniiFarmaceuticeController {
         return "companii_farmaceutice";
     }
 
+    //Cauta companii farmaceutice dupa nume si afiseaza rezultatele
     @GetMapping("/search")
     public String findByNume(@RequestParam("nume") String nume, Model model) {
         if(nume == null || nume.isEmpty()) {
@@ -34,6 +36,7 @@ public class CompaniiFarmaceuticeController {
         return "companii_farmaceutice";
     }
 
+    //Afiseaza formularul pentru adaugarea unei noi companii farmaceutice
     @GetMapping("/new")
     public String showNewForm(Model model) {
         CompaniiFarmaceutice companie = new CompaniiFarmaceutice();
@@ -41,6 +44,7 @@ public class CompaniiFarmaceuticeController {
         return "companie-form-insert";
     }
 
+    //Proceseaza salvarea unei companii farmaceutice noi sau actualizate
     @PostMapping("/save")
     public String saveCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie, Model model) {
         try{
@@ -53,6 +57,7 @@ public class CompaniiFarmaceuticeController {
         }
     }
 
+    //Proceseaza actualizarea unei companii farmaceutice
     @PostMapping("/update")
     public String updateCompanie(@ModelAttribute("companie") CompaniiFarmaceutice companie, Model model) {
         try{
@@ -65,6 +70,7 @@ public class CompaniiFarmaceuticeController {
         }
     }
 
+    //Afiseaza formularul de editare pentru o companie farmaceutica specifica
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int id, Model model) {
         CompaniiFarmaceutice companie = companiiFarmaceuticeService.findById(id);
@@ -72,6 +78,7 @@ public class CompaniiFarmaceuticeController {
         return "companie-form";
     }
 
+    //Sterge o companie farmaceutica si redirectioneaza la lista de companii
     @GetMapping("/delete/{id}")
     public String deleteCompanie(@PathVariable("id") int id) {
         companiiFarmaceuticeService.deleteCompanie(id);

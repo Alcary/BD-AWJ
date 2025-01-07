@@ -94,6 +94,9 @@
     </style>
 </head>
 <body>
+<div th:if="${errorMessage}" class="alert alert-danger">
+    <p th:text="${errorMessage}"></p>
+</div>
 <div class="login-container">
     <h1>Autentificare</h1>
     <form action="/login" method="post">

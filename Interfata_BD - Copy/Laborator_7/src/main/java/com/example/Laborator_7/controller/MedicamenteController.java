@@ -1,3 +1,4 @@
+//Este un controller care se ocupa de gestionarea cererilor legate de Medicamente
 package com.example.Laborator_7.controller;
 
 import com.example.Laborator_7.dao.MedicamenteDAO;
@@ -19,6 +20,7 @@ public class MedicamenteController {
     @Autowired
     private MedicamenteDAO medicamenteDAO;
 
+    //Returneaza toate medicamentele si le afiseaza intr-o lista pe pagina web
     @GetMapping
     public String getAllMedicamente(Model model) {
         List<Medicamente> medicamentes = medicamenteService.getAllMedicamente();
@@ -26,6 +28,7 @@ public class MedicamenteController {
         return "medicamente";
     }
 
+    //Cauta medicamente dupa nume si afiseaza rezultatele
     @GetMapping("/search")
     public String findByNume(@RequestParam("nume") String nume, Model model) {
         if(nume == null || nume.isEmpty()) {
@@ -36,6 +39,7 @@ public class MedicamenteController {
         return "medicamente";
     }
 
+    //Cauta medicamente dupa orasul companiei si afiseaza rezultatele
     @GetMapping("/searchCompanieOras")
     public String getMedicamenteOras(@RequestParam("oras") String oras, Model model) {
         List<Medicamente> medicamente = medicamenteService.findMedicamentByCompanieOras(oras);
@@ -43,6 +47,7 @@ public class MedicamenteController {
         return "medicamente";
     }
 
+    //Afiseaza formularul pentru adaugarea unui nou medicament
     @GetMapping("/new")
     public String showNewForm(Model model) {
         Medicamente medicamente = new Medicamente();
@@ -50,6 +55,7 @@ public class MedicamenteController {
         return "medicamente-form-insert";
     }
 
+    //Proceseaza salvarea unui medicament nou sau actualizat
     @PostMapping("/save")
     public String saveMedicament(@ModelAttribute("medicamente") Medicamente medicamente, Model model) {
         try{
@@ -62,6 +68,7 @@ public class MedicamenteController {
         }
     }
 
+    //Proceseaza actualizarea unui medicament
     @PostMapping("/update")
     public String updateMedicament(@ModelAttribute("medicamente") Medicamente medicamente, Model model) {
         try{
@@ -74,6 +81,7 @@ public class MedicamenteController {
         }
     }
 
+    //Afiseaza formularul de editare pentru un medicament specific
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int id, Model model) {
         Medicamente medicamente = medicamenteService.findById(id);
@@ -81,6 +89,7 @@ public class MedicamenteController {
         return "medicamente-form";
     }
 
+    //Sterge un medicament si redirectioneaza la lista de medicamente
     @GetMapping("/delete/{id}")
     public String deleteMedicament(@PathVariable("id") int id) {
         medicamenteService.deleteMedicament(id);

@@ -1,3 +1,4 @@
+//Entitatea Pacienti_Medicamente cu atributele din tabel si gettere si settere pentru acestea
 package com.example.Laborator_7.entity;
 
 public class Pacienti_Medicamente {

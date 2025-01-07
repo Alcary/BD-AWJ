@@ -1,6 +1,6 @@
+//Este un controller care se ocupa de gestionarea cererilor legate de Medic
 package com.example.Laborator_7.controller;
 
-import com.example.Laborator_7.dao.MedicDAO;
 import com.example.Laborator_7.entity.Medic;
 import org.springframework.stereotype.Controller;
 import com.example.Laborator_7.service.MedicService;
@@ -16,9 +16,8 @@ public class MedicController {
 
     @Autowired
     private MedicService medicService;
-    @Autowired
-    private MedicDAO medicDAO;
 
+    //Returneaza toti medicii si ii afiseaza intr-o lista pe pagina web
     @GetMapping
     public String getAllMedics(Model model) {
         List<Medic> medici = medicService.getAllMedics();
@@ -26,6 +25,7 @@ public class MedicController {
         return "medici";
     }
 
+    //Cauta medici dupa nume si afiseaza rezultatele
     @GetMapping("/search")
     public String findByNume(@RequestParam("nume") String nume, Model model) {
         if(nume == null || nume.isEmpty()) {
@@ -36,6 +36,7 @@ public class MedicController {
         return "medici";
     }
 
+    //Cauta medici dupa spital si afiseaza rezultatele
     @GetMapping("/searchSpital")
     public String getMedicSpital(@RequestParam("spital") String spital, Model model) {
         List<Medic> medici = medicService.findMedicBySpital(spital);
@@ -43,6 +44,7 @@ public class MedicController {
         return "medici";
     }
 
+    //Afiseaza formularul pentru adaugarea unui medic nou
     @GetMapping("/new")
     public String showNewForm(Model model) {
         Medic medic = new Medic();
@@ -50,9 +52,11 @@ public class MedicController {
         return "medic-form-insert";
     }
 
+    //Proceseaza salvarea unui medic nou sau actualizat
     @PostMapping("/save")
     public String saveMedic(@ModelAttribute("medic") Medic medic, Model model) {
-        try{
+        try {
+            //Seteaza ID-ul supervizorului ca null daca este 0
             if (medic.getIdSupervizor() != null && medic.getIdSupervizor() == 0) {
                 medic.setIdSupervizor(null);
             }
@@ -65,9 +69,11 @@ public class MedicController {
         }
     }
 
+    //Proceseaza actualizarea unui medic
     @PostMapping("/update")
     public String updateMedic(@ModelAttribute("medic") Medic medic, Model model) {
-        try{
+        try {
+            //Seteaza ID-ul supervizorului ca null daca este 0
             if (medic.getIdSupervizor() != null && medic.getIdSupervizor() == 0) {
                 medic.setIdSupervizor(null);
             }
@@ -80,6 +86,7 @@ public class MedicController {
         }
     }
 
+    //Afiseaza formularul de editare pentru un medic specific
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int id, Model model) {
         Medic medic = medicService.findById(id);
@@ -87,6 +94,7 @@ public class MedicController {
         return "medic-form";
     }
 
+    //Sterge un medic si redirectioneaza la lista de medici
     @GetMapping("/delete/{id}")
     public String deleteMedic(@PathVariable("id") int id) {
         medicService.deleteMedic(id);
