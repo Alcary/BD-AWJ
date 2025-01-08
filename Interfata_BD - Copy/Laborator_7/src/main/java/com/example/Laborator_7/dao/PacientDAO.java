@@ -49,11 +49,12 @@ public class PacientDAO {
                 "FROM pacienti P " +
                 "LEFT JOIN medici M ON P.id_medic = M.id_medic " +
                 "LEFT JOIN apartinatori A ON P.id_apartinator = A.id_apartinator " +
-                "WHERE P.id_pacient IN ( " +
-                "   SELECT PB.id_pacient " +
+                "WHERE EXISTS ( " +
+                "   SELECT 1 " +
                 "   FROM pacienti_boli PB " +
                 "   INNER JOIN boli_asociate B ON PB.id_boala = B.id_boala " +
-                "   WHERE B.nume LIKE CONCAT('%', ?, '%') " +
+                "   WHERE PB.id_pacient = P.id_pacient " +
+                "     AND B.nume LIKE CONCAT('%', ?, '%') " +
                 ")";
         return jdbcTemplate.query(sql, new PacientRowMapper(), boala);
     }

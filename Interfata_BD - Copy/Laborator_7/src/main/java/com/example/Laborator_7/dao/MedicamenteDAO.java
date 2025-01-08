@@ -45,13 +45,15 @@ public class MedicamenteDAO {
     //Cauta medicamente produse de companii localizate intr-un oras specific
     public List<Medicamente> findMedicamentByCompanieOras(String oras) {
         String sql = "SELECT M.*, " +
-                "C.Nume AS NumeCompanie " +
-                "FROM medicamente M " +
-                "INNER JOIN companii_farmaceutice C ON M.id_companie = C.id_companie " +
-                "WHERE M.id_companie IN ( " +
-                "   SELECT C.id_companie " +
+                "  (SELECT C.Nume " +
                 "   FROM companii_farmaceutice C " +
-                "   WHERE C.oras LIKE CONCAT('%', ?, '%'))";
+                "   WHERE C.id_companie = M.id_companie) AS NumeCompanie " +
+                "FROM medicamente M " +
+                "WHERE M.id_companie = ANY ( " +
+                "  SELECT C.id_companie " +
+                "  FROM companii_farmaceutice C " +
+                "  WHERE C.oras LIKE CONCAT('%', ?, '%') " +
+                ")";
         return jdbcTemplate.query(sql, new MedicamentRowMapper(), oras);
     }
 
