@@ -1,6 +1,6 @@
 /** Test pentru serviciul AdminService
- * @author
- * @version 9 January 2025
+ * @author Calaras Alexandru
+ * @version 11 Ianuarie 2025
  */
 package com.example.Laborator_7.service;
 

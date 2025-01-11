@@ -1,6 +1,6 @@
 /** Test pentru entitatea Admin
  * @author Calaras Alexandru
- * @version 9 Ianuarie 2025
+ * @version 11 Ianuarie 2025
  */
 package com.example.Laborator_7.entity;
 
