@@ -1,4 +1,7 @@
-//Este un controller care se ocupa de gestionarea cererilor legate de companii farmaceutice
+/**Este un controller care se ocupa de gestionarea cererilor legate de companii farmaceutice
+ * @author Calaras Alexandru
+ * @version 8 Ianuarie 2025
+ */
 package com.example.Laborator_7.controller;
 
 import com.example.Laborator_7.entity.CompaniiFarmaceutice;

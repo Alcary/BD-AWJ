@@ -1,4 +1,7 @@
-//Realizeaza interogarile SQL pentru Pacienti
+/** Realizeaza interogarile SQL pentru Pacienti
+ * @author Calaras Alexandru
+ * @version 4 Ianuarie 2025
+ */
 package com.example.Laborator_7.dao;
 
 import com.example.Laborator_7.entity.Pacient;

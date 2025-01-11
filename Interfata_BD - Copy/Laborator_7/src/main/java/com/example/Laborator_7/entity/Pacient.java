@@ -1,4 +1,7 @@
-//Entitatea Pacient cu atributele din tabel si gettere si settere pentru acestea
+/** Entitatea Pacient cu atributele din tabel si gettere si settere pentru acestea
+ * @author Calaras Alexandru
+ * @version 16 Decembrie 2024
+ */
 package com.example.Laborator_7.entity;
 
 import jakarta.annotation.Nullable;

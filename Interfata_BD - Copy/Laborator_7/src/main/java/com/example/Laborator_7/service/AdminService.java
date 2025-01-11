@@ -1,4 +1,7 @@
-//Serviciu care gestioneaza logica aplicatiei pentru entitatea Admin
+/** Serviciu care gestioneaza logica aplicatiei pentru entitatea Admin
+ * @author Calaras Alexandru
+ * @version 7 Ianuarie 2025
+ */
 package com.example.Laborator_7.service;
 
 import com.example.Laborator_7.dao.AdminDAO;

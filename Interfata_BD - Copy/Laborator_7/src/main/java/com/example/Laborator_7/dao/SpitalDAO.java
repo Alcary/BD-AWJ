@@ -1,4 +1,7 @@
-//Realizeaza interogarile SQL pentru Spitale
+/** Realizeaza interogarile SQL pentru Spitale
+ * @author Calaras Alexandru
+ * @version 9 Ianuarie 2025
+ */
 package com.example.Laborator_7.dao;
 
 import com.example.Laborator_7.entity.Spital;

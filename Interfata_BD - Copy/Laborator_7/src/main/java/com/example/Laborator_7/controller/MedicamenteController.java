@@ -1,4 +1,7 @@
-//Este un controller care se ocupa de gestionarea cererilor legate de Medicamente
+/** Este un controller care se ocupa de gestionarea cererilor legate de Medicamente
+ * @author Calaras Alexandru
+ * @version 6 Ianuarie 2025
+ */
 package com.example.Laborator_7.controller;
 
 import com.example.Laborator_7.dao.MedicamenteDAO;

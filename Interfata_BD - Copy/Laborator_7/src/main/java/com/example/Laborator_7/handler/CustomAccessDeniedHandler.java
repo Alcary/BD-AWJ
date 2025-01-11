@@ -1,4 +1,7 @@
-//Handler personalizat pentru gestionarea cazurilor in care accesul este refuzat
+/** Handler personalizat pentru gestionarea cazurilor in care accesul este refuzat
+ * @author Calaras Alexandru
+ * @version 9 Ianuarie 2025
+ */
 package com.example.Laborator_7.handler;
 
 import org.springframework.security.access.AccessDeniedException;

@@ -1,4 +1,7 @@
-//Este un controller care se ocupa de gestionarea cererilor legate de Medic
+/**Este un controller care se ocupa de gestionarea cererilor legate de Medic
+ * @author Calaras Alexandru
+ * @version 8 Ianuarie 2025
+ */
 package com.example.Laborator_7.controller;
 
 import com.example.Laborator_7.entity.Medic;

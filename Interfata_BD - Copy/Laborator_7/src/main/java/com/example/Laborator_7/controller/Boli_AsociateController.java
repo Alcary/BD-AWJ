@@ -1,4 +1,7 @@
-//Este un controller care se ocupa de gestionarea cererilor legate de boli asociate
+/**Este un controller care se ocupa de gestionarea cererilor legate de boli asociate
+ * @author Calaras Alexandru
+ * @version 27 Decembrie 2024
+ */
 package com.example.Laborator_7.controller;
 
 import com.example.Laborator_7.entity.Boli_Asociate;

@@ -1,4 +1,7 @@
-//Serviciu care incarca detaliile unui admin pe baza numelui de utilizator
+/** Serviciu care incarca detaliile unui admin pe baza numelui de utilizator
+ * @author Calaras Alexandru
+ * @version 8 Ianuarie 2025
+ */
 package com.example.Laborator_7.service;
 
 import com.example.Laborator_7.dao.AdminDAO;
@@ -26,7 +29,7 @@ public class CustomAdminDetailsService implements UserDetailsService {
         Admin admin = adminDAO.findByUsername(username);
         if (admin == null) {
             //Arunca o exceptie daca adminul nu este gasit
-            throw new UsernameNotFoundException("Admin not found");
+            throw new UsernameNotFoundException("User-ul nu a fost gasit!");
         }
 
         //Creeaza un obiect UserDetails pentru autentificare

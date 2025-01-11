@@ -1,4 +1,7 @@
-//Este un controller pentru pagina de Log In
+/**Este un controller pentru pagina de Log In
+ * @author Calaras Alexandru
+ * @version 9 Ianuarie 2025
+ */
 package com.example.Laborator_7.controller;
 
     import com.example.Laborator_7.service.AdminService;
@@ -28,7 +31,7 @@ package com.example.Laborator_7.controller;
             Admin admin = adminService.findByUsername(username);
 
             if(admin != null && admin.getParola().equals(password)) {
-                return "redirect:/admin";
+                return "redirect:/index";
             }
             else{
                 model.addAttribute("errorMessage", "Credențialele introduse sunt incorecte!");

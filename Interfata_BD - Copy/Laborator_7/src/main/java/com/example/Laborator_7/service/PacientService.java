@@ -1,4 +1,7 @@
-//Serviciu care gestioneaza logica aplicatiei pentru entitatea Pacient
+/** Serviciu care gestioneaza logica aplicatiei pentru entitatea Pacient
+ * @author Calaras Alexandru
+ * @version 6 Ianuarie 2025
+ */
 package com.example.Laborator_7.service;
 
 import com.example.Laborator_7.dao.PacientDAO;

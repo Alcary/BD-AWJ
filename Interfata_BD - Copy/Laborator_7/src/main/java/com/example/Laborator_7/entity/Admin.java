@@ -1,4 +1,7 @@
-//Entitatea Admin cu atributele din tabel si gettere si settere pentru acestea
+/** Entitatea Admin cu atributele din tabel si gettere si settere pentru acestea
+ * @autor Calaras Alexandru
+ * @version 20 Decembrie 2024
+ */
 package com.example.Laborator_7.entity;
 
 public class Admin {

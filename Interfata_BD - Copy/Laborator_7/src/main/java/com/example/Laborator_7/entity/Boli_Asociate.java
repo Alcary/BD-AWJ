@@ -1,4 +1,7 @@
-//Entitatea Boli_Asociate cu atributele din tabel si gettere si settere pentru acestea
+/** Entitatea Boli_Asociate cu atributele din tabel si gettere si settere pentru acestea
+ * @author Calaras Alexandru
+ * @version 15 Decembrie 2024
+ */
 package com.example.Laborator_7.entity;
 
 public class Boli_Asociate {

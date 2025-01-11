@@ -1,4 +1,7 @@
-//Realizeaza interogarile SQL pentru Apartinatori
+/** Realizeaza interogarile SQL pentru Apartinatori
+ * @author Calaras Alexandru
+ * @version 29 Decembrie 2024
+ */
 package com.example.Laborator_7.dao;
 
 import com.example.Laborator_7.entity.Apartinator;

@@ -1,18 +1,20 @@
-//Configureaza securitatea aplicatiei
-//Defineste reglile de autorizare pentru rutele aplicatiei
+/** Clasa ce configureaza securitatea aplicatiei
+ * Defineste reglile de autorizare pentru rutele aplicatiei
+ * @author Calaras Alexandru
+ * @version 9 Ianuarie 2025
+ */
 package com.example.Laborator_7.config;
 
 import com.example.Laborator_7.handler.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecurityConfig {
+public class Config_Securitate {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

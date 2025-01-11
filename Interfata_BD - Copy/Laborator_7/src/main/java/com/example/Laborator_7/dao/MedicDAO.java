@@ -1,4 +1,7 @@
-//Realizeaza interogarile SQL pentru Medici
+/** Realizeaza interogarile SQL pentru Medici
+ * @author Calaras Alexandru
+ * @version 7 Ianuarie 2025
+ */
 package com.example.Laborator_7.dao;
 
 import com.example.Laborator_7.entity.Medic;

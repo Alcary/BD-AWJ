@@ -1,4 +1,7 @@
-//Entitatea Apartinator cu atributele din tabel si gettere si settere pentru acestea
+/** Entitatea Apartinator cu atributele din tabel si gettere si settere pentru acestea
+ * @author Calaras Alexandru
+ * @version 15 Decembrie 2024
+ */
 package com.example.Laborator_7.entity;
 
 public class Apartinator {
